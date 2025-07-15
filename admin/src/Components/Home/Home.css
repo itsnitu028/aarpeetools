@@ -1,0 +1,14 @@
+.myflex-container{
+    display: flex;
+    flex-direction: row;
+}
+.dum20{
+    width: 20%;
+}
+.dum80{
+    width: 80%;
+}
+.hc{
+   background: #ae432e !important;
+   color: white !important;
+}  

@@ -1,0 +1,39 @@
+.mysidebar{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    gap:50px;
+    height: 120vh;
+    background: white;
+    margin-top: 1px;
+    border-right: #d6d6d6 2px solid;
+}
+.sidebar-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 20px;
+    padding: 5px 20px;
+    border-radius: 6px;
+    background: #f6f6f6;
+    gap: 20px;
+    cursor: pointer;
+    color: black;
+}
+.sidebar-item p{
+    margin-top: 10px;
+}
+.active .sidebar-item{
+    border: black solid 1px;
+
+   
+}
+.dum20{
+    width: 20%;
+}
+.dum80{
+    width: 80%;
+}
+body{
+   background-color: #333940 ;
+}

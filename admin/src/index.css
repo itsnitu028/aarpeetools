@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poller+One&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+@keyframes bounce-10 {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+.animate-bounce-5 {
+  animation: bounce-10 2s ease-in-out 1;
+}
+body{
+  margin: 0;
+  background-color: #f6f6f6;
+  height: 100vh;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
