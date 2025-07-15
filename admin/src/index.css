@@ -30,3 +30,16 @@ body, html {
   padding: 0;
   height: 100%;
 }
+
+/* Make react-slick dots bigger and more visible */
+.slick-dots li button:before {
+  font-size: 12px !important;
+  padding-top: 6px;
+  color: #BE3144 !important;
+  opacity: 0.75;
+}
+.slick-dots li.slick-active button:before {
+  color: #872341 !important;
+  padding-top: 6px;
+  opacity: 1;
+}
