@@ -1,0 +1,131 @@
+.moau-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 50px;
+  padding: 48px 40px;
+  margin: 80px auto;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  min-height: 420px;
+}
+
+.moau-content {
+  flex: 1 1 60%;
+  padding-right: 32px;
+}
+
+.moau-title {
+  color: #872341;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.moau-desc {
+  color: #333;
+  font-size: 1.08rem;
+  margin-bottom: 32px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.moau-bold {
+  font-weight: 700;
+}
+
+.moau-btn {
+  display: block;
+  margin: 0 auto;
+  background: #be3144;
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 10px 35px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-items: center;
+  text-align: center;
+}
+.moau-btn:hover {
+  background: #872341;
+}
+
+.moau-imgs-wrapper {
+  flex: 1 1 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.moau-flip-img {
+  width: 340px;
+  height: 340px;
+  perspective: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moau-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
+  transform-style: preserve-3d;
+}
+
+.moau-flip-img:hover .moau-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.moau-img {
+  width: 340px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  background: #f6f6f6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+.moau-img-front {
+  z-index: 2;
+}
+
+.moau-img-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .moau-container {
+    flex-direction: column;
+    padding: 32px 12px;
+    border-radius: 30px;
+  }
+  .moau-content {
+    padding-right: 0;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .moau-imgs-wrapper {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .moau-flip-img, .moau-img {
+    width: 220px;
+    height: 220px;
+  }
+  .moau-desc {
+    text-align: center;
+  }
+} 
