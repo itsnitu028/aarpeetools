@@ -5,6 +5,8 @@ import AboutUsComponents from '../aboutUsComponents/aboutUsComponents'
 import FeaturedProducts from '../featuredProducts/featuredProducts.jsx'
 import BestSelling from '../bestSelling/BestSelling.jsx'
 import MoreOnAboutUs from '../MoreOnAboutUs/MoreOnAboutUs.jsx'
+import OurQualities from '../OurQualities/OurQualities.jsx'
+import CopyrightPage from '../CopyrightPage/CopyrightPage.jsx'
 
 const CustomerHome = () => {
   return (
@@ -15,6 +17,8 @@ const CustomerHome = () => {
       <FeaturedProducts />
       <BestSelling />
       <MoreOnAboutUs />
+      <OurQualities />
+      <CopyrightPage />
     </div>
   )
 }
