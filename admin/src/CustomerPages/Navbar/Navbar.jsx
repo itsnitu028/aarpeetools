@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo-new.png"
 import { IoCartOutline } from "react-icons/io5";
 import { FaUserCircle } from 'react-icons/fa'; 
@@ -7,7 +8,6 @@ function Navbar() {
 
     const [cartOpen, setCartOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
 
   return (
  <div className="bg-gray-50 shadow-sm w-full px-6  flex items-center">
@@ -21,26 +21,12 @@ function Navbar() {
   {/* Push rest to right */}
   <div className="flex items-center space-x-6 ml-auto">
     {/* Navigation Links */}
-    <ul className="flex space-x-6 text-gray-700 items-center">
-      <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">Home</li>
-      <li className="relative">
-        <button
-          onClick={() => {
-            setServicesOpen(!servicesOpen);
-            setCartOpen(false);
-            setProfileOpen(false);
-          }}
-          className="mt-2 hover:bg-gray-200 px-2 cursor-pointer"
-        >
-          Category
-        </button>
-        {servicesOpen && (
-          <ul className="absolute top-8 left-0 w-40 bg-white shadow-md rounded-md py-2 z-20">
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">X</li>
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Y</li>
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Z</li>
-          </ul>
-        )}
+    <ul className="flex space-x-6 items-center" style={{ color: '#374151' }}>
+      <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">
+      <Link to="/" style={{ textDecoration: 'none', color: '#374151' }}>Home</Link>
+      </li>
+      <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer no-underline">
+        <Link to="/category" style={{ textDecoration: 'none', color: '#374151' }}>Category</Link>
       </li>
       <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">Products</li>
        <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">About</li>
@@ -52,7 +38,6 @@ function Navbar() {
         onClick={() => {
           setCartOpen(!cartOpen);
           setProfileOpen(false);
-          setServicesOpen(false);
         }}
         className="relative p-2 rounded-full hover:bg-gray-200 transition"
       >
@@ -78,7 +63,6 @@ function Navbar() {
         onClick={() => {
           setProfileOpen(!profileOpen);
           setCartOpen(false);
-          setServicesOpen(false);
         }}
         className="rounded-full border-2 border-transparent hover:border-gray-300 transition"
       >

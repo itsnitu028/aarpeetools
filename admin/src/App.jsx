@@ -14,6 +14,7 @@ import Add_Product from './Pages/Add Product/Add_Product'
 import Product_List from './Pages/Product List/Product_List'
 import EditProduct from './Pages/EditProduct/EditProduct'
 import CustomerHome from './CustomerComponents/CustomerHome/CustomerHome'
+import Category from './CustomerPages/Category/Category'
 import {Toaster} from "react-hot-toast";
 import bg from "../src/assets/image.png"
 
@@ -49,6 +50,7 @@ const App = () => {
       <Routes >
          {/* Customer routes */}
       <Route index path='/' element={<CustomerHome /> } />
+      <Route path='/category' element={<Category />} />
 
        {/* Admin routes */}
       <Route path='/api/admin/login' element={<Login />}/>
