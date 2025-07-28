@@ -87,7 +87,7 @@ const Category = () => {
                   </div>
                 </div>
               </div>
-            </NavLink>
+            </NavLink >
           ))}
         </div>
       </div>
