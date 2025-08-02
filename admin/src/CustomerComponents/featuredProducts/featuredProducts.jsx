@@ -80,7 +80,7 @@ const FeaturedProducts = () => {
       
     <div style={{ width: '95%', margin: '0 auto' }}>
 
-    <div className="font-bold text-5xl py-5" style={{ textAlign: "center", color: "#8B2C3B" }}>Featured Products</div>
+    <div className="font-bold text-5xl py-5" style={{ textAlign: "center", color: "#6d65c6" }}>Featured Products</div>
       <Slider {...settings}>
         {products.map((product, idx) => (
           <div key={idx} style={{ padding: '0 16px', display: 'flex', justifyContent: 'center' }}>

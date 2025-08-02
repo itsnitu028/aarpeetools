@@ -55,7 +55,19 @@ export const addCategory = async (req, res) => {
   }
 export const getCategoryById=async (req, res) => {
     try {
-      const category = await Category.findById(req.params.id).populate("parent", "category");
+      const { id } = req.params;
+      
+      // Validate id
+      if (!id || id === 'undefined') {
+        return res.status(400).json({ success: false, message: "Invalid category ID provided" });
+      }
+      
+      // Check if id is a valid MongoDB ObjectId
+      if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(400).json({ success: false, message: "Invalid category ID format" });
+      }
+      
+      const category = await Category.findById(id).populate("parent", "category");
   
       if (!category) {
         return res.status(404).json({ success: false, message: "Category not found" });

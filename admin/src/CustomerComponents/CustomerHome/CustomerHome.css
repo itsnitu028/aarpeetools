@@ -1,0 +1,64 @@
+.customer-home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-section {
+  width: 100%;
+}
+
+.home-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Individual section styling */
+.navbar-section {
+  position: relative;
+  z-index: 1000;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+}
+
+.about-section,
+.featured-section,
+.bestselling-section,
+.more-about-section,
+.qualities-section {
+  padding: 20px 0;
+  background: transparent;
+}
+
+.copyright-section {
+  margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .customer-home-container {
+    padding: 0;
+  }
+  
+  .about-section,
+  .featured-section,
+  .bestselling-section,
+  .more-about-section,
+  .qualities-section {
+    padding: 15px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section,
+  .featured-section,
+  .bestselling-section,
+  .more-about-section,
+  .qualities-section {
+    padding: 10px 0;
+  }
+}

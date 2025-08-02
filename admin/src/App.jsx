@@ -15,6 +15,9 @@ import Product_List from './Pages/Product List/Product_List'
 import EditProduct from './Pages/EditProduct/EditProduct'
 import CustomerHome from './CustomerComponents/CustomerHome/CustomerHome'
 import Category from './CustomerPages/Category/Category'
+import FilterByCategory from './CustomerPages/FilterByCategory/FilterByCategory'
+import Product from './CustomerPages/Product/Product'
+import ShowProduct from './CustomerPages/ShowProduct/ShowProduct'
 import {Toaster} from "react-hot-toast";
 import bg from "../src/assets/image.png"
 
@@ -51,6 +54,9 @@ const App = () => {
          {/* Customer routes */}
       <Route index path='/' element={<CustomerHome /> } />
       <Route path='/category' element={<Category />} />
+      <Route path='/product' element={<Product/>} />
+      <Route path='/product/:id' element={<ShowProduct/> }/>
+      <Route path='/category/:id' element={<FilterByCategory />} />
 
        {/* Admin routes */}
       <Route path='/api/admin/login' element={<Login />}/>

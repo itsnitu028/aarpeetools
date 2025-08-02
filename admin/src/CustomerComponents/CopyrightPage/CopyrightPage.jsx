@@ -6,7 +6,7 @@ import houseIcon from '../../assets/house.png';
 
 const CopyrightPage = () => {
   return (
-    <footer className="bg-[#131a22] text-[#11162a] pt-8 md:pt-12 pb-4 md:pb-6 px-4 md:px-10 w-full">
+    <footer className="bg-[#131a22] text-[#11162a]   pb-4 md:pb-6 px-4 md:px-10 w-full">
       <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-start gap-8 md:gap-0">
         {/* Left Section */}
         <div className="flex flex-col items-start w-full md:w-auto md:ml-5">

@@ -91,7 +91,7 @@ export default function Hero() {
             className={`text-lg mb-6 font-semibold transition-all duration-1000 delay-700 ease-out min-h-[2rem] ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[30px] opacity-0'
             }`}
-            style={{ color: '#BE3144' }}
+            style={{ color: ' #2c3e50' }}
           >
             <span 
               className={`inline-block transition-all duration-500 ease-in-out ${
@@ -110,13 +110,13 @@ export default function Hero() {
             }`}
           >
             <button
-              className="px-7 py-3 bg-[#BE3144] rounded-md font-bold flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-[#872341] hover:bg-white border-2 border-[#BE3144] group"
+              className="px-7 py-3 bg-[#2c3e50] rounded-md font-bold flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-[#2c3e50] hover:bg-white border-2 border-[#6d65c6] group"
             >
               <span className="animate-pulse">Explore Tools</span>
               <ChevronRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 animate-bounce" />
             </button>
             <button
-              className="px-10 py-3 rounded-md font-bold border-2 border-[#872341] text-[#872341] transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-white hover:bg-[#872341] group"
+              className="px-10 py-3 rounded-md font-bold border-2 border-[#2c3e50] text-[#2c3e50] transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-white hover:bg-[#2c3e50] group"
             >
               <span className="animate-pulse">Learn More</span>
             </button>

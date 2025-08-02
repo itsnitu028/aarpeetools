@@ -17,18 +17,34 @@ export const addProduct = async (req, res) => {
   
       const image = req.file?.filename;
   
-      const newProduct = new Product({
-        name,
-        description,
-        image,
-        type,
-        simple: type === "simple" ? JSON.parse(simple) : undefined,
-        variable: type === "variable" ? JSON.parse(variable) : undefined,
-        category
-      });
-  
-      await newProduct.save();
-      res.json({ success: true, message: "Product added successfully!" });
+      let parsedVariable = null;
+    if (type === "variable" && variable) {
+      const parsed = JSON.parse(variable); // { variations: [...] }
+      parsedVariable = {
+        variations: (parsed.variations || []).map((v) => ({
+          sizeInch: v.sizeInch || null,
+          sizeMM: v.sizeMM || null,
+          unit: v.unit || null,
+          prices: (v.prices || []).map((p) => ({
+            materialName: p.materialName || null,
+            price: p.price || null
+          }))
+        }))
+      };
+    }
+
+    const newProduct = new Product({
+      name,
+      description,
+      image,
+      type,
+      simple: type === "simple" ? JSON.parse(simple) : undefined,
+      variable: parsedVariable,
+      category
+    });
+
+    await newProduct.save();
+    res.json({ success: true, message: "Product added successfully!" });
     } catch (err) {
       console.error(err);
       res.status(500).json({ success: false, message: "Failed to add product." });
@@ -103,3 +119,44 @@ export const updateProduct = async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   }
+
+// Get products by category ID
+export const getProductsByCategory = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    
+    // Validate categoryId
+    if (!categoryId || categoryId === 'undefined') {
+      return res.status(400).json({ error: 'Invalid category ID provided' });
+    }
+    
+    // Check if categoryId is a valid MongoDB ObjectId
+    if (!categoryId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ error: 'Invalid category ID format' });
+    }
+    
+    const products = await Product.find({ category: categoryId }).populate('category');
+    
+    // Transform products to match frontend expectations
+    const transformedProducts = products.map(product => ({
+      _id: product._id,
+      productName: product.name, // Frontend expects 'productName'
+      name: product.name,
+      description: product.description,
+      imageUrls: product.image ? [`http://localhost:4000/uploads/${product.image}`] : [], // Frontend expects array
+      price: product.type === 'simple' ? product.simple?.sellingPrice || product.simple?.regularPrice || 0 : 
+             product.variable?.variations?.[0]?.prices?.[0]?.price || 0, // Get first price for variable products
+      stock: Math.floor(Math.random() * 100) + 1, // Mock stock data - replace with real stock logic
+      category: product.category,
+      type: product.type,
+      simple: product.simple,
+      variable: product.variable,
+      createdAt: product.createdAt || new Date()
+    }));
+    
+    res.json(transformedProducts);
+  } catch (err) {
+    console.error('Error fetching products by category:', err);
+    res.status(500).json({ error: 'Failed to fetch products by category' });
+  }
+}

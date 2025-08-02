@@ -1,99 +1,219 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar.jsx'
 import CopyrightPage from "../../CustomerComponents/CopyrightPage/CopyrightPage.jsx"
 import redbasket from '../../assets/banner.png'
-import HSStoolbit from '../../assets/HSS_tool_Bit.png' 
-import carbideend from '../../assets/carbide end mill.png'
-import hsspunches from "../../assets/hss punches.png"
-import carbidecenters from "../../assets/carbide centers.png"
-import hssreamers from "../../assets/hss reamers.png"
+import './Category.css'
 
 const Category = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  const categories = [
-          {
-        id: 1,
-        name: "HSS Tool Bit",
-        image: HSStoolbit
-      },
-    {
-      id: 2,
-      name: "Carbide End Mills",
-      image: carbideend
-    },
-    {
-      id: 3,
-      name: "HSS Punches",
-      image: hsspunches
-    },
-    {
-      id: 4,
-      name: "Carbide Centers",
-      image: carbidecenters
-    },
-    {
-      id: 5,
-      name: "HSS Reamers",
-      image: hssreamers
-    },
-  
-  ];
+ 
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [categoriesPerPage] = useState(12);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  // Reset to page 1 when search term changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:4000/customers/categories');
+      if (!response.ok) {
+        throw new Error('Failed to fetch categories');
+      }
+      const data = await response.json();
+      console.log('Fetched categories:', data);
+      setCategories(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Filter categories based on search term
+  const filteredCategories = categories.filter(category => {
+    const matchesSearch = searchTerm === '' || 
+      category.category.toLowerCase().includes(searchTerm.toLowerCase()) ;
+    
+    return matchesSearch;
+  });
+
+  // Pagination
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
+  const currentCategories = filteredCategories.slice(indexOfFirstCategory, indexOfLastCategory);
+  const totalPages = Math.ceil(filteredCategories.length / categoriesPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+ 
+
+  if (loading) {
+    return (
+      <div>
+        <Navbar />
+        <div className="category-page-container">
+          <div className="loading-spinner">
+            <div className="spinner"></div>
+            <p>Loading categories...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <Navbar />
+        <div className="category-page-container">
+          <div className="error-message">
+            <h2>Error</h2>
+            <p>{error}</p>
+            <button onClick={fetchCategories} className="retry-button">
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
-      <div 
-        className="relative w-full overflow-hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <img 
-          src={redbasket} 
-          alt="Red Basket" 
-          className={`w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] object-cover opacity-60 transition-transform duration-1000 ease-out ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
-        />
-      </div>
-      
-      {/* Our Categories Section */}
-      <div className="max-w-full mx-auto px-20 mt-8 mb-12">
-        <div className="text-6xl font-bold text-center mb-8 text-[#872341]  border-[#872341] pb-2">
-          Our Categories
+      <div className="category-page-container">
+        {/* Banner Section */}
+        <div 
+          className="banner-section"
+         
+        >
+          <img 
+            src={redbasket} 
+            alt="Banner" 
+            className='opacity-80'
+          />
         </div>
-        
-                <div className="grid  md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-4 gap-4">
-          {categories.map((category) => (
-            <NavLink 
-              key={category.id} 
-              to={`/category/${category.id}`}
-              className="flex flex-col hover:scale-105 transition-transform duration-300 cursor-pointer no-underline hover:no-underline"
-              style={{ textDecoration: 'none' }}
-            >
-              <div className="bg-white border shadow-sm h-[280px]">
-                <div className="py-3 h-full flex flex-col">
-                  <div className="w-full h-[100px] sm:h-[120px] md:h-[140px] lg:h-[160px] xl:h-[180px] flex items-center justify-center">
-                    {category.image && typeof category.image === 'string' && category.image.includes('Image') ? (
-                      <span className="text-gray-500 text-sm">{category.image}</span>
-                    ) : (
-                      <img src={category.image} alt={category.name} className="w-full h-full object-contain" />
-                    )}
+
+        <div className="category-page-header">
+          <h1>Our Categories</h1>
+          <p>Discover our wide range of high-quality cutting tools and equipment</p>
+        </div>
+
+        {/* Filters and Search */}
+        <div className="filters-section">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search categories..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+            <i className="search-icon">🔍</i>
+          </div>
+
+        </div>
+
+        {/* Results Summary */}
+        <div className="results-summary">
+          <p>
+            Showing {currentCategories.length} of {filteredCategories.length} categories
+            {searchTerm && ` for "${searchTerm}"`}
+          </p>
+        </div>
+
+        {/* Categories Grid */}
+        {currentCategories.length > 0 ? (
+          <div className="categories-grid">
+            {currentCategories.map((category) => (
+              <NavLink
+                key={category._id}
+                to={`/category/${category._id}`}
+                className="category-card"
+                style={{ textDecoration: 'none' }}
+              >
+                <div className="category-content">
+                  <div className="category-icon">
+                    <span className="category-icon-text">
+                      {category.category ? category.category.charAt(0).toUpperCase() : 'C'}
+                    </span>
                   </div>
-                  <div className="flex-1 flex items-end justify-center pt-2">
-                    <p className="text-red-800 text-center font-medium text-2xl sm:text-xl md:text-2xl">
-                      {category.name}
-                    </p>
+                  
+                  <div className="category-info">
+                    <h3 className="category-name">{category.category}</h3>
+                    
+               
+
+                    <div className="category-actions">
+                      <button className="view-category-btn">
+                        View Products
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </NavLink >
-          ))}
-        </div>
+              </NavLink>
+            ))}
+          </div>
+        ) : (
+          <div className="no-categories">
+            <div className="no-categories-content">
+              <h3>No categories found</h3>
+              <p>Try adjusting your search criteria</p>
+              
+            </div>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="pagination-btn"
+            >
+              Previous
+            </button>
+
+            <div className="page-numbers">
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`page-number ${currentPage === page ? 'active' : ''}`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="pagination-btn"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
-    <CopyrightPage  />  
+      <CopyrightPage />
     </div>
   )
-  }
-  
+}
+
 export default Category
