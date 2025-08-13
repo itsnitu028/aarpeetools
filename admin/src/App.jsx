@@ -20,6 +20,7 @@ import Product from './CustomerPages/Product/Product'
 import ShowProduct from './CustomerPages/ShowProduct/ShowProduct'
 import {Toaster} from "react-hot-toast";
 import bg from "../src/assets/image.png"
+import About from './CustomerPages/About/About'
 
 
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
       <Route path='/product' element={<Product/>} />
       <Route path='/product/:id' element={<ShowProduct/> }/>
       <Route path='/category/:id' element={<FilterByCategory />} />
+      <Route path='/about' element={<About/>} />
 
        {/* Admin routes */}
       <Route path='/api/admin/login' element={<Login />}/>

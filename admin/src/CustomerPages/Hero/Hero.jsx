@@ -69,13 +69,13 @@ export default function Hero() {
             className={`text-5xl md:text-4xl lg:text-5xl font-bold mb-2 transition-all duration-1000 ease-out ${
               isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-[-100px] opacity-0'
             }`}
-            style={{ color: '#872341' }}
+            style={{ color: '#000000' }}
           >
             <span 
-              className={`text-black text-xl inline-block transition-all duration-1000 delay-300 animate-pulse ${
+              className={` text-xl inline-block transition-all duration-1000 delay-300 animate-pulse ${
                 isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[-50px] opacity-0'
               }`} 
-              style={{ fontFamily: 'Poller One, cursive' }}
+              style={{ fontFamily: 'Poller One, cursive',color: '#6d65c6' }}
             >
               Unleash Power with 
             </span> <span> AAR PEE TOOLS</span>

@@ -38,7 +38,7 @@ const qualities = [
 
 const OurQualities = () => {
   return (
-    <div className="bg-[#2c3e50] ">
+    <div className="bg-[#2c3e50] py-16 ">
       <div className="max-w-full mx-auto flex flex-col md:flex-row justify-evenly items-center gap-8">
         {qualities.map((q, idx) => (
           <div key={idx} className="flex flex-col items-center text-center flex-1">

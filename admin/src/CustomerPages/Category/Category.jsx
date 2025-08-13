@@ -95,18 +95,20 @@ const Category = () => {
   return (
     <div>
       <Navbar />
-      <div className="category-page-container">
-        {/* Banner Section */}
-        <div 
+       {/* <div 
           className="banner-section"
          
         >
           <img 
             src={redbasket} 
             alt="Banner" 
-            className='opacity-80'
+            className='opacity-80 w-full h-full'
+            
           />
-        </div>
+        </div> */}
+      <div className="category-page-container">
+        {/* Banner Section */}
+       
 
         <div className="category-page-header">
           <h1>Our Categories</h1>

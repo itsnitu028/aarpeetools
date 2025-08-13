@@ -300,7 +300,7 @@ const Product = () => {
                   
                   {product.category && (
                     <div className="product-category">
-                      {product.category.name}
+                      {product.category.category}
                     </div>
                   )}
 

@@ -31,7 +31,9 @@ function Navbar() {
       <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">
       <Link to="/product" style={{ textDecoration: 'none', color: '#374151' }}>Products</Link>
       </li>
-       <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">About</li>
+       <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">
+       <Link to="/about" style={{ textDecoration: 'none', color: '#374151' }}>About</Link>
+       </li>
     </ul>
 
     {/* Cart */}
