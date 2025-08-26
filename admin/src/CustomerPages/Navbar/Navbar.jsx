@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-new.png"
 import { IoCartOutline } from "react-icons/io5";
-import { FaUserCircle } from 'react-icons/fa'; 
+import { FaUserCircle } from 'react-icons/fa';
+import AuthModal from '../Auth/AuthModal'; 
 function Navbar() {
 
     const [cartOpen, setCartOpen] = useState(false);
@@ -33,6 +34,9 @@ function Navbar() {
       </li>
        <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">
        <Link to="/about" style={{ textDecoration: 'none', color: '#374151' }}>About</Link>
+       </li>
+       <li className="mt-2 hover:bg-gray-200 px-2 cursor-pointer">
+         <AuthModal />
        </li>
     </ul>
 
