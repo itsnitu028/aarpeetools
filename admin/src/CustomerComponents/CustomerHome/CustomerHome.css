@@ -1,6 +1,7 @@
 .customer-home-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%);
+  /* background: linear-gradient(135deg, #f5f7fa 10%, #c3cfe2 100%); */
+  background: #fbfbfb;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -62,3 +63,4 @@
     padding: 10px 0;
   }
 }
+

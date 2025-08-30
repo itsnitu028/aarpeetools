@@ -11,6 +11,7 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import {Icon} from 'leaflet'
+import FreeShipping from '../../CustomerComponents/freeShipping/freeShipping.jsx';
 
 // Ensure default marker icons work with Vite bundling
 L.Icon.Default.mergeOptions({
@@ -24,7 +25,7 @@ const About = () => {
     <div className="about-page-container">
       {/* Navbar */}
       <Navbar />
-
+      <FreeShipping />
       {/* Hero Section */}
       <header className="about-hero">
         <div className="hero-overlay"></div>

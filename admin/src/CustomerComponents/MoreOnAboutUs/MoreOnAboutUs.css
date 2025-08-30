@@ -17,7 +17,7 @@
 }
 
 .moau-title {
-  color:#6d65c6;
+  color:#000;
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 18px;
@@ -40,7 +40,7 @@
 .moau-btn {
   display: block;
   margin: 0 auto;
-  background: #2c3e50;
+  background: #bd0000;
   color: #fff;
   border: none;
   border-radius: 22px;
@@ -54,8 +54,8 @@
 }
 .moau-btn:hover {
   background: #ffffff;
-  border: #2c3e50 1px solid;
-  color: #2c3e50;
+  /* border: #2c3e50 1px solid; */
+  color: #bd0000;
 }
 
 .moau-imgs-wrapper {

@@ -4,6 +4,8 @@ import Navbar from '../Navbar/Navbar.jsx'
 import CopyrightPage from "../../CustomerComponents/CopyrightPage/CopyrightPage.jsx"
 import redbasket from '../../assets/banner.png'
 import './Category.css'
+import Banner from '../../CustomerComponents/banner/banner.jsx'
+import FreeShipping from '../../CustomerComponents/freeShipping/freeShipping.jsx'
 
 const Category = () => {
  
@@ -12,7 +14,7 @@ const Category = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [categoriesPerPage] = useState(12);
+  const [categoriesPerPage] = useState(10);
 
   useEffect(() => {
     fetchCategories();
@@ -65,6 +67,7 @@ const Category = () => {
     return (
       <div>
         <Navbar />
+        
         <div className="category-page-container">
           <div className="loading-spinner">
             <div className="spinner"></div>
@@ -79,6 +82,7 @@ const Category = () => {
     return (
       <div>
         <Navbar />
+         <Banner />
         <div className="category-page-container">
           <div className="error-message">
             <h2>Error</h2>
@@ -95,6 +99,8 @@ const Category = () => {
   return (
     <div>
       <Navbar />
+      <FreeShipping />
+      
        {/* <div 
           className="banner-section"
          
@@ -125,7 +131,7 @@ const Category = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
             />
-            <i className="search-icon">🔍</i>
+         
           </div>
 
         </div>
@@ -149,11 +155,7 @@ const Category = () => {
                 style={{ textDecoration: 'none' }}
               >
                 <div className="category-content">
-                  <div className="category-icon">
-                    <span className="category-icon-text">
-                      {category.category ? category.category.charAt(0).toUpperCase() : 'C'}
-                    </span>
-                  </div>
+                  
                   
                   <div className="category-info">
                     <h3 className="category-name">{category.category}</h3>
@@ -213,6 +215,7 @@ const Category = () => {
           </div>
         )}
       </div>
+      <Banner />
       <CopyrightPage />
     </div>
   )

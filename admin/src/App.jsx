@@ -1,4 +1,5 @@
 import React from 'react'
+import "./index.css"
 import Navbar from './Components/Navbar/Navbar'
 import Login from './Components/Login/Login'
 import { Route, Routes ,useLocation} from 'react-router-dom'

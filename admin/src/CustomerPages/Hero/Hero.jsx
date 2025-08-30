@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Wrench, Settings, ChevronRight } from 'lucide-react';
 import cuttingtools from "../../assets/cutting tools.png"
+import bgImg from '../../assets/cutting tools.png';
 
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
@@ -50,15 +51,12 @@ export default function Hero() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Background image with zoom animation */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={cuttingtools} 
-          alt="Tools background" 
-          className={`w-full h-full object-cover opacity-60 transition-transform duration-1000 ease-out ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
-        />
+    
+      <div
+        className="absolute text-white overflow-hidden bg-cover bg-center bg-fixed h-200 w-full"
+        style={{ backgroundImage: `url(${bgImg})` }}
+      >
+        hi
       </div>
       
       {/* Content overlay with staggered animations */}
@@ -75,7 +73,7 @@ export default function Hero() {
               className={` text-xl inline-block transition-all duration-1000 delay-300 animate-pulse ${
                 isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[-50px] opacity-0'
               }`} 
-              style={{ fontFamily: 'Poller One, cursive',color: '#6d65c6' }}
+              style={{ fontFamily: 'Poller One, cursive',color: '#bd0000' }}
             >
               Unleash Power with 
             </span> <span> AAR PEE TOOLS</span>
@@ -110,13 +108,13 @@ export default function Hero() {
             }`}
           >
             <button
-              className="px-7 py-3 bg-[#2c3e50] rounded-md font-bold flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-[#2c3e50] hover:bg-white border-2 border-[#6d65c6] group"
+              className="px-7 py-3 bg-[#000] rounded-md font-bold flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-[#bd0000] hover:bg-[#fbfbfb] hover:opacity-85 border-2 border-[#000000] group"
             >
               <span className="animate-pulse">Explore Tools</span>
               <ChevronRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 animate-bounce" />
             </button>
             <button
-              className="px-10 py-3 rounded-md font-bold border-2 border-[#2c3e50] text-[#2c3e50] transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-white hover:bg-[#2c3e50] group"
+              className="px-10 py-3 rounded-md font-bold border-2 border-[#2c3e50] text-[#2c3e50] transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-[#bd0000] group"
             >
               <span className="animate-pulse">Learn More</span>
             </button>

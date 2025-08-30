@@ -13,3 +13,18 @@
      image
      product type-simple(regular or selling price) or variable(color,size,)
      Category
+
+orders
+order id primary
+amount subtotal
+order discount
+order address(billing,shipping)
+users
+status
+total
+
+order items
+product id ,name,
+qty
+
+

@@ -7,6 +7,8 @@ import BestSelling from '../bestSelling/BestSelling.jsx'
 import MoreOnAboutUs from '../MoreOnAboutUs/MoreOnAboutUs.jsx'
 import OurQualities from '../OurQualities/OurQualities.jsx'
 import CopyrightPage from '../CopyrightPage/CopyrightPage.jsx'
+import FreeShipping from '../freeShipping/freeShipping.jsx'
+import Frontpagebanner from '../frontpagebanner/frontpagebanner.jsx'
 import './CustomerHome.css'
 
 const CustomerHome = () => {
@@ -18,9 +20,18 @@ const CustomerHome = () => {
           <Navbar />
         </div>
 
+        <div>
+          <FreeShipping />
+        </div>
+
         {/* Hero Section */}
         <div className="hero-section">
           <Hero />
+        </div>
+
+         {/* Featured Products Section */}
+         <div className="featured-section mb-8">
+          <FeaturedProducts />
         </div>
 
         {/* About Us Section */}
@@ -28,9 +39,8 @@ const CustomerHome = () => {
           <AboutUsComponents />
         </div>
 
-        {/* Featured Products Section */}
-        <div className="featured-section">
-          <FeaturedProducts />
+       <div>
+          <Frontpagebanner />
         </div>
 
         {/* Best Selling Section */}
@@ -47,6 +57,8 @@ const CustomerHome = () => {
         <div className="qualities-section">
           <OurQualities />
         </div>
+
+       
 
         {/* Copyright Section */}
         <div className="copyright-section">

@@ -9,6 +9,7 @@ import carbideReamer from "../../assets/bg.png";
 import taperShank from "../../assets/Mask group.png";
 import slotDrill from "../../assets/logo-new.png";
 import { useState } from 'react';
+import "./BestSelling.css";
 
 
 const products = [
@@ -51,76 +52,75 @@ const products = [
   ];
 
 const BestSelling = () => {
-    const [quantities, setQuantities] = useState(Array(products.length).fill(1));
+   
+    const [hoveredIndex, setHoveredIndex] = useState(null);
 
-    const handleQuantityChange = (idx, delta) => {
-      setQuantities((prev) => {
-        const newQuantities = [...prev];
-        newQuantities[idx] = Math.max(1, newQuantities[idx] + delta);
-        return newQuantities;
-      });
-    };
   
-    const settings = {
+  
+     const settings = {
     dots:true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: { slidesToShow: 1 },
-        },
-      ],
-    };
-  
-    return (
-      <div>
-        
-      <div style={{ width: '95%', margin: '0 auto' }}>
-  
-      <div className="font-bold text-5xl py-5" style={{ textAlign: "center", color: "#6d65c6" }}>Best Selling Products</div>
-        <Slider {...settings}>
-          {products.map((product, idx) => (
-            <div key={idx} style={{ padding: '0 16px', display: 'flex', justifyContent: 'center' }}>
-              <div style={{
-                width: 340,
-                height: 350,
-                border: "2px solid #ccc",
-                padding: 16,
-                borderRadius: 8,
-                background: '#fff',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'flex-start'
-              }}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  style={{
-                    width: "100%",
-                    height: 200,
-                    objectFit: "contain",
-                    marginBottom: 24
-                  }}
-                />
-                <h4 style={{ margin: 0, textAlign: "center" }}>{product.name}</h4>
-                <p style={{ margin: "8px 0 0 0", textAlign: "center" }}>
-                  Rs. {product.price}{" "}
-                  <span style={{ textDecoration: "line-through", color: "#888" }}>
-                    Rs. {product.oldPrice}
-                  </span>
-                </p>
-              </div>
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 1 },
+      },
+    ],
+  };
+
+  return (
+    <div>
+      
+    <div style={{ width: '95%', margin: '0 auto' }}>
+
+    <div className="font-bold text-5xl py-5" style={{ textAlign: "center", color: "#bd0000" }}>Best Selling Products</div>
+      <Slider {...settings}>
+        {products.map((product, idx) => (
+          <div key={idx} style={{ padding: '0 16px', display: 'flex', justifyContent: 'center' }}>
+            <div className="product-card mt-4" style={{
+               width: 300,
+               height: 350,
+               border: "2px solid #ccc",
+               padding: 16,
+               borderRadius: 8,
+               background: '#fff',
+               display: 'flex',
+               flexDirection: 'column',
+               alignItems: 'center',
+               justifyContent: 'flex-start',
+               gap:2,
+               overflow:"hidden"
+            }}>
+              <img
+                className="product-image"
+                src={product.image}
+                alt={product.name}
+                style={{
+                  width: "100%",
+                  height: 200,
+                  objectFit: "cover",
+                  overflow:"hidden",
+                  marginBottom: 24
+                }}
+              />
+              <h4 style={{ margin: 0, textAlign: "center" }}>{product.name}</h4>
+              <p style={{ margin: "8px 0 0 0", textAlign: "center" }}>
+                Rs. {product.price}{" "}
+                <span style={{ textDecoration: "line-through", color: "#888" }}>
+                  Rs. {product.oldPrice}
+                </span>
+              </p>
             </div>
-          ))}
-        </Slider>
-      </div>
-      </div>
+          </div>
+        ))}
+      </Slider>
+    </div>
+    </div>
     );
 }
 

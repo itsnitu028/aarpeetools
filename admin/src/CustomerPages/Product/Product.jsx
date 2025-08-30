@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
+import FreeShipping from '../../CustomerComponents/freeShipping/freeShipping';
 import './Product.css';
+import CopyrightPage from '../../CustomerComponents/CopyrightPage/CopyrightPage';
+import Banner from "../../CustomerComponents/banner/banner.jsx"
 
 const Product = () => {
   const navigate = useNavigate();
@@ -192,6 +195,7 @@ const Product = () => {
   return (
     <div>
       <Navbar />
+      <FreeShipping />
       <div className="product-page-container">
         <div className="product-page-header">
           <h1>Our Products</h1>
@@ -208,7 +212,7 @@ const Product = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
             />
-            <i className="search-icon">🔍</i>
+         
           </div>
 
           <div className="filter-controls">
@@ -222,7 +226,7 @@ const Product = () => {
                 <option value="all">All Categories</option>
                 {categories.map(category => (
                   <option key={category._id || category.id} value={category._id || category.id}>
-                    {category.name} (ID: {category._id || category.id})
+                    {category.category} 
                   </option>
                 ))}
               </select>
@@ -299,7 +303,7 @@ const Product = () => {
                   <h3 className="product-name">{product.name}</h3>
                   
                   {product.category && (
-                    <div className="product-category">
+                    <div className="product-category m-2">
                       {product.category.category}
                     </div>
                   )}
@@ -382,6 +386,8 @@ const Product = () => {
           </div>
         )}
       </div>
+      <Banner />
+      <CopyrightPage/>
     </div>
   );
 };

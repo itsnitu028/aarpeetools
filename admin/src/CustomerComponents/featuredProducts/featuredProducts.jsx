@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./featuredProducts.css"; // styles for hover effects
 import cuttingTools from "../../assets/cutting tools.png";
 import cuttingTools1 from "../../assets/cutting tools 1.png";
 import carbideDrill from "../../assets/image.png";
@@ -63,10 +64,10 @@ const FeaturedProducts = () => {
     dots:true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 768,
@@ -80,29 +81,33 @@ const FeaturedProducts = () => {
       
     <div style={{ width: '95%', margin: '0 auto' }}>
 
-    <div className="font-bold text-5xl py-5" style={{ textAlign: "center", color: "#6d65c6" }}>Featured Products</div>
+    <div className="font-bold text-5xl py-5" style={{ textAlign: "center", color: "#bd0000" }}>Featured Products</div>
       <Slider {...settings}>
         {products.map((product, idx) => (
           <div key={idx} style={{ padding: '0 16px', display: 'flex', justifyContent: 'center' }}>
-            <div style={{
-              width: 340,
-              height: 350,
-              border: "2px solid #ccc",
-              padding: 16,
-              borderRadius: 8,
-              background: '#fff',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'flex-start'
+            <div className="product-card mt-4" style={{
+               width: 300,
+               height: 350,
+               border: "2px solid #ccc",
+               padding: 16,
+               borderRadius: 8,
+               background: '#fff',
+               display: 'flex',
+               flexDirection: 'column',
+               alignItems: 'center',
+               justifyContent: 'flex-start',
+               gap:2,
+               overflow:"hidden"
             }}>
               <img
+                className="product-image"
                 src={product.image}
                 alt={product.name}
                 style={{
                   width: "100%",
                   height: 200,
-                  objectFit: "contain",
+                  objectFit: "cover",
+                  overflow:"hidden",
                   marginBottom: 24
                 }}
               />

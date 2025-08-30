@@ -1,6 +1,7 @@
 .product-page-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  background: #fbfbfb;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -17,9 +18,10 @@
 .product-page-header h1 {
   font-size: 3rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #bd0000 !important;
   margin: 0 0 15px 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background: #bd0000;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -212,6 +214,7 @@
 .product-name {
   font-size: 1.3rem;
   font-weight: 700;
+  transform: capitalize !important;
   color: #2c3e50;
   margin: 0 0 10px 0;
   line-height: 1.3;
@@ -229,7 +232,7 @@
   border-radius: 15px;
   font-size: 12px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   text-transform: uppercase;
 }
 
@@ -292,7 +295,8 @@
 .view-details-btn {
   width: 100%;
   padding: 12px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background: #bd0000;
   color: white;
   border: none;
   border-radius: 8px;

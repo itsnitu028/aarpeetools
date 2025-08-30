@@ -1,0 +1,66 @@
+/* FreeShipping.css */
+.free-shipping-banner {
+  animation: slideInDown 0.6s ease-out;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Hover effects for the truck icon */
+.truck-icon:hover {
+  transform: translateX(3px) scale(1.05);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Text enhancement effects */
+.free-shipping-banner span {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Motion lines styling */
+.motion-lines div {
+  background: #000;
+  transition: all 0.3s ease;
+}
+
+.motion-lines div:hover {
+  background: #bd0000;
+  transform: scaleX(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .free-shipping-banner .max-w-7xl {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .free-shipping-banner .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .free-shipping-banner .text-lg {
+    font-size: 1.125rem;
+  }
+  
+  .free-shipping-banner .text-xl {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .free-shipping-banner {
+    padding: 1rem 1.5rem;
+  }
+  
+  .free-shipping-banner .space-x-4 > * + * {
+    margin-left: 1rem;
+  }
+  
+  .free-shipping-banner .truck-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+} 

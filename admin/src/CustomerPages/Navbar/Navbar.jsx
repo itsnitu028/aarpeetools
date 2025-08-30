@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-new.png"
 import { IoCartOutline } from "react-icons/io5";
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa'; 
 import AuthModal from '../Auth/AuthModal'; 
 function Navbar() {
 
