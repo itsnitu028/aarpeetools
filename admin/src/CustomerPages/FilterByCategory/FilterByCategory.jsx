@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar.jsx';
 import './FilterByCategory.css';
 import CopyrightPage from "../../CustomerComponents/CopyrightPage/CopyrightPage.jsx"
+import FreeShipping from '../../CustomerComponents/freeShipping/freeShipping.jsx';
+import Banner from "../../CustomerComponents/banner/banner.jsx";
+import SuggestedProducts from '../../CustomerComponents/SuggestedProducts/SuggestedProducts.jsx';
 
 const FilterByCategory = () => {
   const { id: categoryId } = useParams();
@@ -163,6 +166,7 @@ const FilterByCategory = () => {
   return (
     <div>
       <Navbar />
+       <FreeShipping />
       <div className="product-page-container">
         {/* Header */}
         <div className="product-page-header">
@@ -180,7 +184,7 @@ const FilterByCategory = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
             />
-            <i className="search-icon">🔍</i>
+           
           </div>
 
           <div className="filter-controls">
@@ -345,6 +349,8 @@ const FilterByCategory = () => {
           </div>
         )}
       </div>
+      <Banner />
+      <SuggestedProducts />
       <CopyrightPage />
     </div>
   );

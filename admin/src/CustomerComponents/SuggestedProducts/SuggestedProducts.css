@@ -1,0 +1,27 @@
+/* Hover effects for FeaturedProducts */
+
+.product-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.product-image {
+  transition: transform 0.35s ease, filter 0.35s ease;
+  will-change: transform;
+}
+
+/* Scale image on card hover */
+.product-card:hover .product-image {
+  transform: scale(1.06);
+  filter: saturate(1.05);
+}
+
+/* Optional: smoothen slick slide focus outline */
+.slick-slide:focus {
+  outline: none;
+}

@@ -6,6 +6,7 @@ import redbasket from '../../assets/banner.png'
 import './Category.css'
 import Banner from '../../CustomerComponents/banner/banner.jsx'
 import FreeShipping from '../../CustomerComponents/freeShipping/freeShipping.jsx'
+import SuggestedProducts from "../../CustomerComponents/SuggestedProducts/SuggestedProducts.jsx"
 
 const Category = () => {
  
@@ -216,6 +217,7 @@ const Category = () => {
         )}
       </div>
       <Banner />
+      <SuggestedProducts />
       <CopyrightPage />
     </div>
   )

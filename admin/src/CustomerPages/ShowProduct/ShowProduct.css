@@ -1,12 +1,13 @@
 .show-product-container {
   min-height: 100vh;
-   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+   /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+   background: #fbfbfb;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .product-detail-wrapper {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   background: white;
   border-radius: 20px;

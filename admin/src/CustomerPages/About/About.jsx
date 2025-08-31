@@ -44,8 +44,8 @@ const About = () => {
               <span className="stat-label">Happy Customers</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">50+</span>
-              <span className="stat-label">Product Categories</span>
+              <span className="stat-number">500+</span>
+              <span className="stat-label">Products</span>
             </div>
           </div>
         </div>

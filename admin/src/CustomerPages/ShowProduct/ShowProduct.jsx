@@ -2,6 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar"
 import './ShowProduct.css';
+import FreeShipping from '../../CustomerComponents/freeShipping/freeShipping';
+import CopyrightPage from '../../CustomerComponents/CopyrightPage/CopyrightPage';
+import Banner from "../../CustomerComponents/banner/banner.jsx"
+import SuggestedProducts from "../../CustomerComponents/SuggestedProducts/SuggestedProducts.jsx"
 
 const ShowProduct = () => {
   const { id } = useParams();
@@ -152,6 +156,7 @@ const ShowProduct = () => {
   return (
     <div>
       <Navbar />
+      <FreeShipping />
       <div className="show-product-container">
         <div className="product-detail-wrapper">
          
@@ -395,6 +400,9 @@ const ShowProduct = () => {
           </div>
         </div>
       </div>
+      <Banner />
+      <SuggestedProducts />
+      <CopyrightPage />
     </div>
   );
 };
