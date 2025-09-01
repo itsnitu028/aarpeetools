@@ -2,6 +2,16 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
 
 
 @keyframes bounce-10 {
@@ -66,4 +76,8 @@ body, html {
 /* Change the thumb color on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #bdffff; /* Darker grey on hover */
+}
+
+.cartPanel .MuiPaper-root{
+  width: 500px;
 }

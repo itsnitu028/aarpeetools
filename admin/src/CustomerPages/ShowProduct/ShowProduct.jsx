@@ -164,17 +164,25 @@ const ShowProduct = () => {
           <div className="product-content">
             {/* Product Image */}
             <div className="product-image-section">
-              {product.image ? (
-                <img 
-                  src={`http://localhost:4000/uploads/${product.image}`} 
-                  alt={product.name}
-                  className="product-image"
-                />
-              ) : (
-                <div className="no-image-placeholder">
-                  <span>No Image Available</span>
-                </div>
-              )}
+              <div className="image-with-desc">
+                {product.image ? (
+                  <img 
+                    src={`http://localhost:4000/uploads/${product.image}`} 
+                    alt={product.name}
+                    className="product-image"
+                  />
+                ) : (
+                  <div className="no-image-placeholder">
+                    <span>No Image Available</span>
+                  </div>
+                )}
+                {product.description && (
+                  <div className="product-description">
+                    <h4 className='text-black font-bold'>Description</h4>
+                    <p>{product.description}</p>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Product Information */}
@@ -188,10 +196,7 @@ const ShowProduct = () => {
                 </div>
               )}
 
-              <div className="product-description">
-                <h3>Description</h3>
-                <p>{product.description}</p>
-              </div>
+        
 
               {/* Simple Product Pricing */}
               {product.type === 'simple' && product.simple && (

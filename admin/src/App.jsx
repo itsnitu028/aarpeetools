@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{createContext,useState} from 'react'
 import "./index.css"
 import Navbar from './Components/Navbar/Navbar'
 import Login from './Components/Login/Login'
@@ -22,6 +22,14 @@ import ShowProduct from './CustomerPages/ShowProduct/ShowProduct'
 import {Toaster} from "react-hot-toast";
 import bg from "../src/assets/image.png"
 import About from './CustomerPages/About/About'
+import CartPanel from './CustomerPages/CartPanel/CartPanel'
+
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+
+
+
+const MyContext= createContext();
 
 
 const App = () => {
@@ -33,6 +41,8 @@ const App = () => {
   const isLoginPage = location.pathname === '/api/admin/login';
   const isAdminHome = location.pathname === '/api/admin/home';
   const shouldShowBg = (isLoginPage || isAdminHome) && !isAuthenticated;
+
+  const [openCartPanel, setOpenCartPanel] = useState(false);
 
    const Wrapper = ({ children }) =>
     shouldShowBg ? (
@@ -48,7 +58,17 @@ const App = () => {
       <>{children}</>
     );
 
+    const toggleCartPanel = (newOpen) => () => {
+    setOpenCartPanel(newOpen);
+  };
+
+  const value={
+    setOpenCartPanel
+  }
+
   return (
+    <>
+    <MyContext.Provider value={value}>
     <Wrapper>
        {isAdminRoute && <Navbar />}
        <Toaster />
@@ -76,7 +96,16 @@ const App = () => {
       </Routes>  
 
     </Wrapper>
+    </MyContext.Provider>
+
+    <Drawer open={openCartPanel} onClose={toggleCartPanel(false)} anchor='right'
+    className='cartPanel '>
+        {<CartPanel toggleCartPanel={toggleCartPanel} />}
+      </Drawer>
+   
+     </>
   )
 }
 
-export default App
+export default App;
+export {MyContext};
