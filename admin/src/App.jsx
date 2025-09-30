@@ -23,6 +23,7 @@ import {Toaster} from "react-hot-toast";
 import bg from "../src/assets/image.png"
 import About from './CustomerPages/About/About'
 import CartPanel from './CustomerPages/CartPanel/CartPanel'
+import CheckoutModal from './CustomerPages/Checkout/CheckoutModal'
 
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -43,6 +44,8 @@ const App = () => {
   const shouldShowBg = (isLoginPage || isAdminHome) && !isAuthenticated;
 
   const [openCartPanel, setOpenCartPanel] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [openCheckout, setOpenCheckout] = useState(false);
 
    const Wrapper = ({ children }) =>
     shouldShowBg ? (
@@ -62,8 +65,63 @@ const App = () => {
     setOpenCartPanel(newOpen);
   };
 
+  const getCartKey = (item) => {
+    const parts = [item.productId];
+    if (item.variationKey) parts.push(item.variationKey);
+    if (item.materialName) parts.push(item.materialName);
+    return parts.join('|');
+  };
+
+  const addToCart = (item) => {
+    setCartItems((prev) => {
+      const key = getCartKey(item);
+      const index = prev.findIndex((ci) => getCartKey(ci) === key);
+      if (index !== -1) {
+        const updated = [...prev];
+        updated[index] = {
+          ...updated[index],
+          quantity: updated[index].quantity + item.quantity
+        };
+        return updated;
+      }
+      return [...prev, item];
+    });
+  };
+
+  const removeFromCart = (keyOrIndex) => {
+    setCartItems((prev) => {
+      if (typeof keyOrIndex === 'number') {
+        return prev.filter((_, i) => i !== keyOrIndex);
+      }
+      return prev.filter((ci) => getCartKey(ci) !== keyOrIndex);
+    });
+  };
+
+  const updateCartItemQuantity = (keyOrIndex, quantity) => {
+    setCartItems((prev) => {
+      const index = typeof keyOrIndex === 'number' ? keyOrIndex : prev.findIndex((ci) => getCartKey(ci) === keyOrIndex);
+      if (index === -1) return prev;
+      const updated = [...prev];
+      updated[index] = { ...updated[index], quantity: Math.max(1, quantity) };
+      return updated;
+    });
+  };
+
+  const clearCart = () => setCartItems([]);
+
+  const cartCount = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
+  const cartSubtotal = cartItems.reduce((sum, item) => sum + (Number(item.price) * (item.quantity || 0)), 0);
+
   const value={
-    setOpenCartPanel
+    setOpenCartPanel,
+    setOpenCheckout,
+    addToCart,
+    removeFromCart,
+    updateCartItemQuantity,
+    clearCart,
+    cartItems,
+    cartCount,
+    cartSubtotal
   }
 
   return (
@@ -96,12 +154,15 @@ const App = () => {
       </Routes>  
 
     </Wrapper>
-    </MyContext.Provider>
 
     <Drawer open={openCartPanel} onClose={toggleCartPanel(false)} anchor='right'
     className='cartPanel '>
         {<CartPanel toggleCartPanel={toggleCartPanel} />}
       </Drawer>
+
+    <CheckoutModal open={openCheckout} onClose={()=>setOpenCheckout(false)} />
+
+    </MyContext.Provider>
    
      </>
   )

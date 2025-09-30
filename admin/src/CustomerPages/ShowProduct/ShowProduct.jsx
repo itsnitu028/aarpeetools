@@ -6,15 +6,19 @@ import FreeShipping from '../../CustomerComponents/freeShipping/freeShipping';
 import CopyrightPage from '../../CustomerComponents/CopyrightPage/CopyrightPage';
 import Banner from "../../CustomerComponents/banner/banner.jsx"
 import SuggestedProducts from "../../CustomerComponents/SuggestedProducts/SuggestedProducts.jsx"
+import { useContext } from 'react';
+import { MyContext } from '../../App';
 
 const ShowProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToCart, setOpenCartPanel } = useContext(MyContext);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedVariation, setSelectedVariation] = useState(null);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -106,6 +110,14 @@ const ShowProduct = () => {
     setSelectedMaterial(material);
   };
 
+  const handleIncreaseQuantity = () => {
+    setQuantity(prevQuantity => prevQuantity + 1);
+  };
+
+  const handleDecreaseQuantity = () => {
+    setQuantity(prevQuantity => Math.max(1, prevQuantity - 1));
+  };
+
   const handleSort = (field) => {
     if (sortBy === field) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -113,6 +125,51 @@ const ShowProduct = () => {
       setSortBy(field);
       setSortOrder('asc');
     }
+  };
+
+  const buildCartItem = () => {
+    if (!product) return null;
+    const base = {
+      productId: product._id || id,
+      name: product.name,
+      imageUrl: product.image ? `http://localhost:4000/uploads/${product.image}` : undefined,
+      quantity: quantity
+    };
+    if (product.type === 'simple' && product.simple) {
+      return {
+        ...base,
+        price: Number(product.simple.sellingPrice ?? product.simple.regularPrice) || 0
+      };
+    }
+    if (product.type === 'variable' && selectedVariation && selectedMaterial) {
+      const sizeMM = selectedVariation.sizeMM || '';
+      const sizeInch = selectedVariation.sizeInch || '';
+      const sizeLabel = sizeMM ? `${sizeMM}${sizeInch ? ` (${sizeInch})` : ''}` : (sizeInch || '');
+      return {
+        ...base,
+        price: Number(selectedMaterial.price) || 0,
+        unit: selectedVariation.unit,
+        sizeLabel,
+        materialName: selectedMaterial.materialName,
+        variationKey: `${sizeMM}|${sizeInch}|${selectedVariation.unit}`
+      };
+    }
+    return null;
+  };
+
+  const onAddToCart = () => {
+    const item = buildCartItem();
+    if (!item) return;
+    addToCart(item);
+    setOpenCartPanel(true);
+  };
+
+  const onBuyNow = () => {
+    const item = buildCartItem();
+    if (!item) return;
+    addToCart(item);
+    setOpenCartPanel(true);
+    // Optionally navigate to checkout page in the future
   };
 
   if (loading) {
@@ -394,10 +451,31 @@ const ShowProduct = () => {
 
               {/* Action Buttons */}
               <div className="product-actions">
-                <button className="add-to-cart-btn">
+                <div className="quantity-control">
+                  <span className="quantity-label">Quantity:</span>
+                  <button
+                    type="button"
+                    className="quantity-btn decrease"
+                    onClick={handleDecreaseQuantity}
+                    aria-label="Decrease quantity"
+                    disabled={quantity <= 1}
+                  >
+                    −
+                  </button>
+                  <span className="quantity-value">{quantity}</span>
+                  <button
+                    type="button"
+                    className="quantity-btn increase"
+                    onClick={handleIncreaseQuantity}
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+                <button className="add-to-cart-btn" onClick={onAddToCart}>
                   Add to Cart
                 </button>
-                <button className="buy-now-btn">
+                <button className="buy-now-btn" onClick={onBuyNow}>
                   Buy Now
                 </button>
               </div>

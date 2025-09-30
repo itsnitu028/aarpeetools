@@ -45,7 +45,7 @@ const Navbar = () => {
           <li className="cursor-pointer" onClick={()=>{context.setOpenCartPanel(true);}}>
             {/* <Link to="/cart" className="cart-link"> */}
             
-            <StyledBadge badgeContent={1} color="secondary">
+            <StyledBadge badgeContent={context.cartCount || 0} color="secondary">
             <ShoppingCart />
             </StyledBadge>
               
