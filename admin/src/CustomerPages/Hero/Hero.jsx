@@ -108,7 +108,7 @@ export default function Hero() {
             }`}
           >
             <button
-              className="px-7 py-3 bg-[#000] rounded-md font-bold flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-[#bd0000] hover:bg-[#fbfbfb] hover:opacity-85 border-2 border-[#000000] group"
+              className="px-7 py-3 bg-[#000] rounded-md font-bold flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 hover:text-[#bd0000] hover:bg-[#e3e3e3] hover:opacity-85 border-2 border-[#000000] group"
             >
               <span className="animate-pulse">Explore Tools</span>
               <ChevronRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 animate-bounce" />

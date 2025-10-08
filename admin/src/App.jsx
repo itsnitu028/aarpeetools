@@ -27,6 +27,7 @@ import CheckoutModal from './CustomerPages/Checkout/CheckoutModal'
 
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
+import CartPage from './CustomerPages/CartPage/CartPage'
 
 
 
@@ -138,6 +139,7 @@ const App = () => {
       <Route path='/product/:id' element={<ShowProduct/> }/>
       <Route path='/category/:id' element={<FilterByCategory />} />
       <Route path='/about' element={<About/>} />
+      <Route path='/cart' element={<CartPage />} />
 
        {/* Admin routes */}
       <Route path='/api/admin/login' element={<Login />}/>
