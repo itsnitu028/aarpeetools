@@ -29,6 +29,9 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import CartPage from './CustomerPages/CartPage/CartPage'
 
+import PageNotFound from './PageNotFound'
+import {GoogleOAuthProvider} from '@react-oauth/google';
+
 
 
 const MyContext= createContext();
@@ -47,6 +50,11 @@ const App = () => {
   const [openCartPanel, setOpenCartPanel] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [openCheckout, setOpenCheckout] = useState(false);
+
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user-info");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
    const Wrapper = ({ children }) =>
     shouldShowBg ? (
@@ -110,6 +118,13 @@ const App = () => {
 
   const clearCart = () => setCartItems([]);
 
+  const logout = () => {
+    localStorage.removeItem("user-info");     
+    localStorage.removeItem("auth-token");    
+  
+    setUser(null);  
+  };
+
   const cartCount = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const cartSubtotal = cartItems.reduce((sum, item) => sum + (Number(item.price) * (item.quantity || 0)), 0);
 
@@ -122,7 +137,10 @@ const App = () => {
     clearCart,
     cartItems,
     cartCount,
-    cartSubtotal
+    cartSubtotal,
+    user,
+    setUser,
+    logout,
   }
 
   return (
@@ -134,6 +152,7 @@ const App = () => {
       <Routes >
          {/* Customer routes */}
       <Route index path='/' element={<CustomerHome /> } />
+      <Route index path='/home' element={<CustomerHome /> } />
       <Route path='/category' element={<Category />} />
       <Route path='/product' element={<Product/>} />
       <Route path='/product/:id' element={<ShowProduct/> }/>
@@ -142,8 +161,10 @@ const App = () => {
       <Route path='/cart' element={<CartPage />} />
 
        {/* Admin routes */}
+       
       <Route path='/api/admin/login' element={<Login />}/>
       <Route path='/api/admin/home' element={<Home />} />
+      {/* <Route path='/api/admin' element={<Home />} /> */}
       <Route path='/api/admin/change-password' element={<ChangePassword />} />
       <Route path='/api/admin/add' element={<Add />} />
       <Route path='/api/admin/addproduct' element={<Add_Product />} />
@@ -153,6 +174,9 @@ const App = () => {
       <Route path='/api/admin/update/:id' element={<UpdateCategory />} />
       <Route path='/api/admin/listproduct' element={<Product_List />} />
       <Route path="/api/admin/edit-product/:id" element={<EditProduct />} />
+
+      {/*page not found*/}
+      <Route path='*' element={<PageNotFound />} />
       </Routes>  
 
     </Wrapper>

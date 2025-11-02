@@ -5,7 +5,7 @@ let apiurl = 'http://localhost:4000';
 
 function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: ''
   });
@@ -15,8 +15,8 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.username.trim()) {
-      newErrors.username = 'Name is required';
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
     }
     
     if (!formData.email.trim()) {
@@ -54,13 +54,14 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
       
       if (responseData.success) {
         toast.success(responseData.message, { autoClose: 2000 });
-        onClose();
-        // Reset form
+        
         setFormData({
-          username: '',
+          name: '',
           email: '',
           password: ''
         });
+        onClose();         
+      onSwitchToLogin();
       } else {
         if (responseData.errors) {
           toast.error(responseData.errors, { autoClose: 3000 });
@@ -101,17 +102,17 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
             <div className="space-y-1">
               <label className="block text-sm font-bold text-gray-700">Name</label>
               <input 
-                name="username" 
-                value={formData.username} 
+                name="name" 
+                value={formData.name} 
                 onChange={changeHandler} 
                 type='text' 
                 placeholder="Your Name"
                 className={`w-full px-4 py-2 border border-gray-300 text-base focus:outline-none focus:border-red-500 rounded-lg ${
-                  errors.username ? 'border-red-500' : ''
+                  errors.name ? 'border-red-500' : ''
                 }`}
               />
-              {errors.username && (
-                <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
               )}
             </div>
             
@@ -163,7 +164,7 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
 
-          <button 
+          {/* <button 
             className="w-full py-3 bg-white text-gray-700 border border-gray-300 rounded-lg flex items-center justify-center gap-3 mb-2 hover:bg-gray-50 transition-colors"
           >
             <img 
@@ -172,7 +173,7 @@ function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
               className="w-5 h-5"
             />
             Continue with Google
-          </button>
+          </button> */}
 
           <p className="text-center mt-6 text-gray-600 text-sm">
             Already have an Account?{' '}

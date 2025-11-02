@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
+import { googleAuth } from "../../../api";
+import { MyContext } from "../../../App";
+import { useContext } from "react";
 
 let apiurl = 'http://localhost:4000';
 
 function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
+  const context = useContext(MyContext);
+  
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
@@ -49,7 +58,9 @@ function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
       
       if (responseData.success) {
         localStorage.setItem('auth-token', responseData.token);
-        localStorage.setItem('user', responseData.currUser);
+        localStorage.setItem('name', responseData.user.name);
+
+        context.setUser(responseData.user);
         
         toast.success(responseData.message, { autoClose: 2000 });
         onClose();
@@ -60,8 +71,8 @@ function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
           password: ''
         });
         
-        // You can add navigation logic here if needed
-        // navigate('/dashboard');
+        
+        navigate('/home');
       } else {
         toast.error(responseData.message || 'Login failed', { autoClose: 3000 });
       }
@@ -78,9 +89,35 @@ function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
     }
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = `${apiurl}/auth/google`;
+ 
+
+  const responseGoogle = async (authResult) => {
+    try {
+      // console.log("Google Auth Response:", authResult);
+      if(authResult['code']) {
+        const result =await googleAuth(authResult['code']);
+        const {email, name, picture}= result.data.user;
+        const token = result.data.token;
+        const obj = {email, name, picture, token};
+localStorage.setItem('user-info', JSON.stringify(obj));
+context.setUser(obj)
+        // console.log('result.data.user', result.data.user);
+        // console.log(token);
+        toast.success("Logged in successfully ");
+        onClose();
+      }
+
+    } catch (error) {
+      console.log("Google Login Error:", error);
+      toast.error("Google login failed ");
+    }
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: responseGoogle,
+    onError: responseGoogle,
+    flow: "auth-code",
+  });
 
   if (!isOpen) return null;
 
@@ -148,7 +185,7 @@ function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
           </div>
 
           <button 
-            onClick={handleGoogleLogin}
+              onClick={() => googleLogin()}
             className="w-full py-3 bg-white text-gray-700 border border-gray-300 rounded-lg flex items-center justify-center gap-3 mb-4 hover:bg-gray-50 transition-colors"
           >
             <img 

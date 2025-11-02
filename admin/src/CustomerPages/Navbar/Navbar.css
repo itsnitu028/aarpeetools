@@ -82,6 +82,39 @@
   transition: 0.3s;
 }
 
+/* .group:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: white;
+  width: 160px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 12px;
+  padding: 8px 0;
+  z-index: 999;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-item:hover {
+  background: #f3f3f3;
+}
+
+.logout-btn {
+  font-weight: 500;
+  color: rgb(230, 56, 56);
+} */
+
+
 /* Mobile Styles */
 @media (max-width: 768px) {
   .nav-links {

@@ -82,13 +82,42 @@ items-center justify-between flex-col">
 <span className="text-red-500 font-bold">Rs. {(cartSubtotal + 80).toFixed(2)}</span>
 </div>
 <br/>
-<div className="flex items-center justify-between w-full gap-5">
+{/* <div className="flex items-center justify-between w-full gap-5">
   <Link to="/cart" className='w-[100%]' >
   <Button className=" btn-lg w-full " variant="outlined" color='error'>View Cart</Button>
   </Link>
   <button onClick={()=>{ setOpenCheckout(true); toggleCartPanel(false)(); }} className='w-[100%]'>
   <Button className="btn-lg w-full" variant="contained" color="success">Checkout</Button>
   </button>
+</div> */}
+<div className="flex items-center justify-between w-full gap-5">
+
+{/*  View Cart */}
+<Button
+  component={Link}
+  to="/cart"
+  className="btn-lg w-full"
+  variant="outlined"
+  color="error"
+  fullWidth
+>
+  View Cart
+</Button>
+
+{/*  Checkout */}
+<Button
+  onClick={() => {
+    setOpenCheckout(true);
+    toggleCartPanel(false)();
+  }}
+  className="btn-lg w-full"
+  variant="contained"
+  color="success"
+  fullWidth
+>
+  Checkout
+</Button>
+
 </div>
 </div>
 </div>

@@ -7,7 +7,7 @@ function Login() {
      const navigate = useNavigate();
   const [state,setState]=useState('Login');
   const [formData,setFormData]=useState({
-    username:'',
+    name:'',
     password:'',
     email:'',
     mobile:'',
@@ -92,8 +92,8 @@ function Login() {
               <div className="space-y-1">
                 <label className="block text-sm font-bold text-gray-700">Name</label>
                 <input 
-                  name="username" 
-                  value={formData.username} 
+                  name="name" 
+                  value={formData.name} 
                   onChange={changeHandler} 
                   type='text' 
                   placeholder="Your Name"

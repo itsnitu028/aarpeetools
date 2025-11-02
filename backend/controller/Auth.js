@@ -1,6 +1,8 @@
 import Users from "../model/Users.js";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { oauth2client } from "../utils/googleConfig.js";
+import axios from "axios";
 
 const register=async(req,res)=>{
     try{
@@ -16,7 +18,7 @@ const register=async(req,res)=>{
         })
 
         await newUser.save();
-        res.status(200).json({message:"user register successfully",newUser});
+        res.status(200).json({success: true,message:"user register successfully",newUser});
 
     }
     catch(error){
@@ -64,4 +66,52 @@ const Logout=async(req,res)=>{
     }
 }
 
-export {register,Login,Logout}
+const googleLogin = async (req, res) => {
+    try{
+    const { code } = req.query;
+    const googleRes = await oauth2client.getToken(code);
+    oauth2client.setCredentials (googleRes.tokens);
+
+    const userRes = await axios.get(
+    `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${googleRes.tokens.access_token}`
+    )
+
+    const { email, name, picture}= userRes.data;
+
+    let user = await Users.findOne({ email });
+
+    if (!user) {
+        user = await Users.create({
+            name,
+            email,
+            picture
+        });
+    }
+
+    
+    const token = jwt.sign({ userId: user._id }, process.env.JWT);
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false, // change to true in production (HTTPS)
+        sameSite: "lax",
+        maxAge: 36000000 // 10 hours
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "Google Login Successful",
+        user,
+        token
+    });
+
+} catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Google Login Failed" });
+  
+     }
+}
+
+    
+
+export {register,Login,Logout,googleLogin}
